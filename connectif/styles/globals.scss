@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap");
+// colors
+$bgColor: #2f2a2a;
+$fontColor: #ffffff;
+$primaryColor: #101efc;
+$secondaryColor: #4e99fc;
+
+// fonts:
+$mainFont: "Nunito", sans-serif;
+$secondaryFont: "Oswald", sans-serif;
+
+// font sizes
+$desktopTitle: 32px;
+$desktopSubtitle: 29px;
+$desktopText: 25px;
+$mobileTitle: 27px;
+$mobileSubtitle: 24px;
+$mobileText: 20px;
+
+// screen brakes
+$mobileS: 320px;
+$mobileM: 375px;
+$mobileL: 425px;
+$tablet: 720px;
+$laptop: 1024px;
+$laptopL: 1440px;
