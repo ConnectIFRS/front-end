@@ -1,29 +1,39 @@
+"use client";
 import DefaultInput from "@/components/DefaultInput";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
 import logo from "../../public/logo.svg";
 import styles from "../../styles/page.module.scss";
+import { api } from "./api";
+import { salvarTokenNoCookie } from "./api/functions";
 
-export default function Home() {
+export default function Login() {
+  const router = useRouter();
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const response = await api.post("/login", {
+      login: formData.get("email"),
+      password: formData.get("password"),
+    });
+    const { token } = response.data;
+    if (salvarTokenNoCookie(token)) {
+      router.push("/homepage");
+    }
+  };
   return (
     <main className={styles.main}>
       <div className={styles.logoArea}>
-        <Image
-          src={logo}
-          alt="logo"
-          width={136}
-          height={136}
-          // placeholder="blur"
-          quality={100}
-        />
+        <Image src={logo} alt="logo" width={136} height={136} quality={100} />
         <h1>ConnectIF</h1>
       </div>
-      <form>
+      <form onSubmit={handleLogin}>
         <DefaultInput
           type="text"
-          name="username"
-          id="username"
-          autoComplete="off"
+          name="email"
+          id="email"
           required
           label="E-mail"
         />
@@ -34,6 +44,7 @@ export default function Home() {
           required
           label="Senha"
         />
+
         <div className={styles.inputGroup}>
           <button type="submit">Entrar</button>
         </div>
