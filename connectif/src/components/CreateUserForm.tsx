@@ -12,8 +12,11 @@ import { MediaPicker } from "./MediaPicker";
 
 export default async function CreateUserForm() {
   const router = useRouter();
-  const response = await api.get("/classes");
-  const classes: classes_type[] = response.data;
+  let classes: classes_type[] = [];
+  if (classes.length == 0) {
+    const response = await api.get("/classes");
+    classes = response.data;
+  }
 
   const handleCreateUser = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
