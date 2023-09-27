@@ -1,9 +1,12 @@
 import Footer from "@/components/Footer";
 
+import HomeTop from "@/components/HomeTop";
+import styles from "../../../styles/home.module.scss";
+
 export default function Home() {
   return (
-    <main style={{ minHeight: "100vh" }}>
-      Olá mundo
+    <main className={styles.main}>
+      <HomeTop />
       <Footer />
     </main>
   );

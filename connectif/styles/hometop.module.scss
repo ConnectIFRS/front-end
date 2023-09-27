@@ -1,0 +1,12 @@
+@import "./globals.scss";
+.topArea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+    h1 {
+        font-family: $mainFont;
+        font-size: $mobileTitle;
+    }
+}
