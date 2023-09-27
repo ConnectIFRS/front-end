@@ -23,6 +23,9 @@ export default function HomeTop() {
           option: (provided, state) => ({
             ...provided,
             fontFamily: "Oswald",
+            padding: "0 10px ",
+            backgroundColor: "#2f2a2a",
+            overflow: "hidden",
           }),
         }}
         theme={(theme) => ({

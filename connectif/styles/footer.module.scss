@@ -1,7 +1,8 @@
 @import "./globals.scss";
 .footer {
     bottom: 0;
-    position: absolute;
+    position: fixed;
+    background-color: $bgColor;
     border-top: 2px solid $primaryColor;
     display: flex;
     padding: 10px;
