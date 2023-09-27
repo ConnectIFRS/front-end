@@ -23,5 +23,18 @@ export type post_type = {
         id: string
     },
     likes: number,
-    comments: number
+    comments: number,
+    likedByUser: boolean
+}
+
+export type comment_type = {
+    id: string,
+    user: {
+        className: string,
+        name: string,
+        profilePic: string,
+        id: string
+    },
+    content: string,
+    createdAt: Date
 }
