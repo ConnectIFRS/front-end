@@ -1,0 +1,47 @@
+@import "./globals.scss";
+.form {
+    display: flex;
+    flex-direction: column;
+    label {
+        bottom: 52px;
+        position: fixed;
+        right: 0;
+        z-index: 1;
+        background: rgb(0, 0, 0);
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(47, 42, 42, 1) 15%);
+        height: 41px;
+        display: flex;
+        align-items: center;
+        width: 75px;
+        justify-content: center;
+
+        button {
+            background-color: transparent;
+            padding: 5px 3px;
+            border-radius: 5px;
+            border: 0;
+            color: white;
+            cursor: pointer;
+        }
+    }
+    input {
+        bottom: 55px;
+        position: fixed;
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+        border-top: 1px solid $secondaryColor;
+        // height: 20px;
+        padding: 10px 5px;
+        color: white;
+        font-family: $mainFont;
+
+        &::placeholder {
+            font-family: $mainFont;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}

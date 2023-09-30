@@ -1,8 +1,10 @@
 import { api } from "@/app/api";
 import { comment_type } from "@/app/api/types";
-import EmptyComments from "@/components/EmptyComponents";
+import CreateCommentForm from "@/components/CreateCommentForm";
+import EmptyComments from "@/components/EmptyCommments";
 import Footer from "@/components/Footer";
 import { cookies } from "next/headers";
+import styles from "../../../../../styles/comments.module.scss";
 
 export default async function Comments({ params }: { params: { id: string } }) {
   const id: string = params.id;
@@ -19,9 +21,12 @@ export default async function Comments({ params }: { params: { id: string } }) {
   commentsList = comments.data;
 
   return (
-    <main>
+    <main className={styles.main}>
+      <div className={styles.commentsHeader}>
+        <p>Comentários</p>
+      </div>
       {commentsList.length === 0 ? (
-        <EmptyComments userId="438597" userName="Fulano" />
+        <EmptyComments />
       ) : (
         <>
           {commentsList.map((comment) => {
@@ -29,6 +34,7 @@ export default async function Comments({ params }: { params: { id: string } }) {
           })}
         </>
       )}
+      <CreateCommentForm postId={id} />
       <Footer />
     </main>
   );

@@ -1,0 +1,19 @@
+@import "./globals.scss";
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 60px;
+    font-family: $secondaryFont;
+
+    .commentsHeader {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0;
+        border-bottom: 2px solid $primaryColor;
+        p {
+        }
+    }
+}
