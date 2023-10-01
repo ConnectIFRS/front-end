@@ -8,7 +8,9 @@ export type JWTToken = {
     className: string,
     createdAt: Date,
     profilePic: string,
-    exp: number
+    exp: number,
+    sub: string,
+    iat: number,
 }
 
 export type post_type = {
@@ -37,4 +39,26 @@ export type comment_type = {
     },
     content: string,
     createdAt: Date
+}
+
+export type user_type = {
+    id: string,
+    preferences: {
+        id: number,
+        title: string,
+        icon: string
+    }[],
+    profilePic: string,
+    followers: number,
+    following: number,
+    name: string,
+    description: string,
+    followedByUser: boolean,
+    posts: {
+        coverUrl: string,
+        id: string
+    }[],
+    className: { 
+        id: number, className: string 
+    }
 }

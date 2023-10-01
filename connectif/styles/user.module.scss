@@ -1,0 +1,49 @@
+@import "./globals.scss";
+.main {
+    display: flex;
+    flex-direction: column;
+    font-family: $secondaryFont;
+    gap: 15px;
+
+    .topPart {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .userData {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            img {
+                aspect-ratio: 1/1;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .userInfo {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-top: 15px;
+            }
+
+            .userUtilData {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+        .userActions {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+        }
+    }
+}

@@ -13,16 +13,18 @@
         width: 100%;
         padding: 0 20px;
 
-        img {
-            aspect-ratio: "1/1";
-            border-radius: 50%;
-        }
+        a {
+            img {
+                aspect-ratio: "1/1";
+                border-radius: 50%;
+            }
 
-        .authorInfos {
-            display: flex;
-            flex-direction: column;
-            font-family: $secondaryFont;
-            font-size: 14px;
+            .authorInfos {
+                display: flex;
+                flex-direction: column;
+                font-family: $secondaryFont;
+                font-size: 14px;
+            }
         }
     }
     .postImage {

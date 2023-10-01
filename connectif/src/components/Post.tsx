@@ -38,17 +38,21 @@ export default function Post({ post }: { post: post_type }) {
   return (
     <div className={styles.post}>
       <div className={styles.authorArea}>
-        <Image
-          src={serverPost.user.profilePic}
-          alt={serverPost.user.name}
-          width={40}
-          height={40}
-          quality={100}
-        />
-        <div className={styles.authorInfos}>
-          <span>{serverPost.user.name}</span>
-          <span>{serverPost.user.userClass}</span>
-        </div>
+        <Link href={`/user/${serverPost.user.id}`}>
+          <Image
+            src={serverPost.user.profilePic}
+            alt={serverPost.user.name}
+            width={40}
+            height={40}
+            quality={100}
+          />
+        </Link>
+        <Link href={`/user/${serverPost.user.id}`}>
+          <div className={styles.authorInfos}>
+            <span>{serverPost.user.name}</span>
+            <span>{serverPost.user.userClass}</span>
+          </div>
+        </Link>
       </div>
       <img
         src={serverPost.coverUrl}

@@ -22,7 +22,7 @@ export default async function Footer() {
           alt="home"
         />
       </Link>
-      <Link href="post/new">
+      <Link href="/post/new">
         <Image
           src={unactivePost}
           width={25}
@@ -40,7 +40,10 @@ export default async function Footer() {
           alt="search"
         />
       </Link>
-      <UserProfilePic image={decodedToken.profilePic} />
+      <UserProfilePic
+        image={decodedToken.profilePic}
+        userId={decodedToken.sub}
+      />
     </footer>
   );
 }

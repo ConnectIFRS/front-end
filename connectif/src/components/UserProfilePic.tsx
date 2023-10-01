@@ -4,10 +4,16 @@ import Link from "next/link";
 import { useUrl } from "nextjs-current-url";
 import styles from "../../styles/footer.module.scss";
 
-export default function UserProfilePic({ image }: { image: string }) {
+export default function UserProfilePic({
+  image,
+  userId,
+}: {
+  image: string;
+  userId: string;
+}) {
   const { href: currentUrl, pathname } = useUrl() ?? {};
   return (
-    <Link href="/user" className={styles.profilePic}>
+    <Link href={`/user/${userId}`} className={styles.profilePic}>
       <Image
         src={image}
         width={25}
@@ -15,7 +21,9 @@ export default function UserProfilePic({ image }: { image: string }) {
         quality={100}
         alt="user"
         style={
-          String(currentUrl).match("/user") ? { border: "1px solid white" } : {}
+          String(currentUrl).match(`/user/${userId}`)
+            ? { border: "1px solid white" }
+            : {}
         }
       />
     </Link>

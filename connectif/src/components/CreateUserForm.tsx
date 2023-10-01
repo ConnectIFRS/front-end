@@ -39,6 +39,7 @@ export default async function CreateUserForm() {
         login: formData.get("email"),
         password: formData.get("password"),
         class: Number(formData.get("classId")),
+        description: formData.get("description"),
       });
       const { token } = response.data;
       if (salvarTokenNoCookie(token)) {
@@ -69,6 +70,13 @@ export default async function CreateUserForm() {
         id="password"
         required
         label="Confirme a senha"
+      />
+      <DefaultInput
+        type="text"
+        name="description"
+        id="description"
+        required
+        label="Descrição"
       />
       <DefaultSelect name="classId">
         <option value="">Selecione uma turma</option>
