@@ -27,6 +27,7 @@ export default function CreateCommentForm({ postId }: { postId: string }) {
     if (response.status === 200 || response.status === 201) {
       router.push(`/post/comments/${postId}`);
     }
+    formData.set("comment", "");
   };
   return (
     <form className={styles.form} onSubmit={handleCreateComment}>
