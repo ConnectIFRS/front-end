@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/user.module.scss";
+import UserField from "./UserField";
 import Follow from "./buttons/Follow";
 import Others from "./buttons/Others";
 
@@ -30,18 +31,21 @@ export default async function User({ id }: { id: string }) {
             />
             <span>{user.name}</span>
           </div>
-          <div className={styles.userInfo}>
-            <span>{user.posts.length}</span>
-            <span>Publicações</span>
-          </div>
-          <div className={styles.userInfo}>
-            <span>{user.followers}</span>
-            <span>Seguidores</span>
-          </div>
-          <div className={styles.userInfo}>
-            <span>{user.following}</span>
-            <span>Seguindo</span>
-          </div>
+          <UserField
+            dataToShow={user.posts.length}
+            text="Publicações"
+            url={`/user/${user.id}`}
+          />
+          <UserField
+            dataToShow={user.followers}
+            text="Seguidores"
+            url={`/user/followers/${user.id}`}
+          />
+          <UserField
+            dataToShow={user.following}
+            text="Seguindo"
+            url={`/user/following/${user.id}`}
+          />
         </div>
         <div>
           <p>{user.description}</p>
@@ -65,6 +69,21 @@ export default async function User({ id }: { id: string }) {
             <Others text="Mensagem" url={`/message/${user.id}`} />
           )}
         </div>
+      </div>
+      <div className={styles.postsList}>
+        {user.posts.length > 0 ? (
+          <div className={styles.postsArea}>
+            {user.posts.map((post) => {
+              return (
+                <Link href={`/post/${post.id}`}>
+                  <img src={post.coverUrl} alt="user-post" />
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <p>no posts</p>
+        )}
       </div>
     </main>
   );

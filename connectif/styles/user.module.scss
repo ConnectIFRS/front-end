@@ -46,4 +46,31 @@
             align-items: center;
         }
     }
+    .postsList {
+        width: 100%;
+        .postsArea {
+            margin-bottom: 40px;
+            // display: flex;
+            // // flex-direction: column;
+            // flex-wrap: wrap;
+            // align-items: center;
+            // justify-content: center;
+            // gap: 5px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+            a {
+                // flex-basis: calc(100% / 3);
+                // flex: 1 1;
+
+                img {
+                    aspect-ratio: 3/4;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
 }
