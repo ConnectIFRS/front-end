@@ -35,13 +35,16 @@ export default async function User({ id }: { id: string }) {
             dataToShow={user.posts.length}
             text="Publicações"
             url={`/user/${user.id}`}
+            padding
           />
           <UserField
+            padding
             dataToShow={user.followers}
             text="Seguidores"
             url={`/user/followers/${user.id}`}
           />
           <UserField
+            padding
             dataToShow={user.following}
             text="Seguindo"
             url={`/user/following/${user.id}`}

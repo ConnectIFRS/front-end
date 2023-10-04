@@ -62,3 +62,11 @@ export type user_type = {
         id: number, className: string 
     }
 }
+
+export type resumed_user_type = {
+    id: string,
+    profilePic: string,
+    name: string,
+    userClass: string,
+    followedByUser: boolean
+}

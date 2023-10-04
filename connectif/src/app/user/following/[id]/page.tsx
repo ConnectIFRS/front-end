@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import FollowersAndFollowingSearch from "@/components/search/FollowersAndFollowingSearch";
 import { cookies } from "next/headers";
 
-export default async function FollowersPage({
+export default async function FollowingPage({
   params,
 }: {
   params: { id: string };

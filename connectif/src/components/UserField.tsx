@@ -5,17 +5,20 @@ export default function UserField({
   dataToShow,
   text,
   url,
+  padding,
 }: {
   dataToShow: number;
   text: string;
-  url: string;
+  url?: string;
+  padding?: boolean;
 }) {
   const router = useRouter();
   return (
     <div
+      style={padding ? { paddingTop: "15px" } : {}}
       className={styles.userInfo}
       onClick={() => {
-        router.push(url);
+        router.push(url ?? "");
       }}
     >
       <span>{dataToShow}</span>
