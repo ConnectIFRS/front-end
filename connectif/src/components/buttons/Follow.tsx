@@ -6,10 +6,12 @@ export default function Follow({
   userId,
   token,
   followedByUser,
+  redirectUrl,
 }: {
   userId: string;
   token: string;
   followedByUser: boolean;
+  redirectUrl: string;
 }) {
   const router = useRouter();
   return (
@@ -30,7 +32,7 @@ export default function Follow({
           }
         );
         if (response.status === 200 || response.status === 201) {
-          router.push(`/user/${userId}`);
+          router.push(redirectUrl);
         }
       }}
     >

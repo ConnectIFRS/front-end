@@ -2,9 +2,11 @@
 import { api } from "@/app/api";
 import { JWTToken, resumed_user_type } from "@/app/api/types";
 import decode from "jwt-decode";
+import { useUrl } from "nextjs-current-url";
 import { FormEvent, useEffect, useState } from "react";
 import styles from "../../../styles/followerssearch.module.scss";
 import ResumedUserCard from "../ResumedUserCard";
+
 export default function DefaultSearch({
   token,
   userId,
@@ -38,6 +40,7 @@ export default function DefaultSearch({
     );
     setUsers(response.data);
   };
+  const { href: currentUrl, pathname } = useUrl() ?? {};
   const decodedToken: JWTToken = decode(token);
   //   useEffect(() => {
   //     handleGetUserRecentSearch();
@@ -66,6 +69,7 @@ export default function DefaultSearch({
                 user={user}
                 key={user.id}
                 userId={decodedToken.sub}
+                redirectUrl={currentUrl ?? ""}
               />
             );
           })}

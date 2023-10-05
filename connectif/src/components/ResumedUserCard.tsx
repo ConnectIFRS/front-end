@@ -10,10 +10,12 @@ export default function ResumedUserCard({
   user,
   token,
   userId,
+  redirectUrl,
 }: {
   user: resumed_user_type;
   token: string;
   userId: string;
+  redirectUrl: string;
 }) {
   const router = useRouter();
   const decodedToken: JWTToken = decode(token);
@@ -25,13 +27,26 @@ export default function ResumedUserCard({
         <span>{user.userClass}</span>
       </div>
       {decodedToken.sub === user.id ? (
-        <div style={{ width: "60.39px" }}></div>
+        <div style={{ width: "80px" }}>
+          {" "}
+          <span></span>{" "}
+        </div>
       ) : (
-        <Follow
-          followedByUser={user.followedByUser}
-          token={token}
-          userId={userId}
-        />
+        <div
+          style={{
+            width: "80px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Follow
+            followedByUser={user.followedByUser}
+            token={token}
+            userId={user.id}
+            redirectUrl={redirectUrl}
+          />
+        </div>
       )}
     </div>
   );

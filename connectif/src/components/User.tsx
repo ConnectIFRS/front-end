@@ -61,6 +61,7 @@ export default async function User({ id }: { id: string }) {
               token={token ?? ""}
               userId={user.id}
               followedByUser={user.followedByUser}
+              redirectUrl={`/user/${user.id}`}
             />
           )}
           {decodedToken.sub === user.id ? (
