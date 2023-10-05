@@ -1,5 +1,6 @@
 "use client";
 import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUrl } from "nextjs-current-url";
 import styles from "../../styles/secondaryheader.module.scss";
@@ -9,21 +10,28 @@ export default function FollowingAndFollowersHeader({
   userName,
   followers,
   following,
+  userId,
 }: {
   userName: string;
   followers: number;
   following: number;
+  userId: string;
 }) {
   const router = useRouter();
   const { href: currentUrl, pathname } = useUrl() ?? {};
   return (
     <header className={styles.header}>
       <div className={styles.topPart}>
-        <ArrowLeft height={20} width={20} onClick={() => router.back()} />{" "}
-        <span onClick={() => router.back()}>{userName}</span>
+        <ArrowLeft
+          height={20}
+          width={20}
+          onClick={() => router.push(`/user/${userId}`)}
+        />{" "}
+        <span onClick={() => router.push(`/user/${userId}`)}>{userName}</span>
       </div>
       <div className={styles.followersArea}>
-        <div
+        <Link
+          href={`/user/followers/${userId}`}
           style={
             String(currentUrl).match("followers")
               ? { borderBottom: "2px solid #101efc", paddingBottom: "3px" }
@@ -31,8 +39,9 @@ export default function FollowingAndFollowersHeader({
           }
         >
           <UserField dataToShow={followers} text="Seguidores" />
-        </div>
-        <div
+        </Link>
+        <Link
+          href={`/user/following/${userId}`}
           style={
             String(currentUrl).match("following")
               ? { borderBottom: "2px solid #101efc", paddingBottom: "3px" }
@@ -40,7 +49,7 @@ export default function FollowingAndFollowersHeader({
           }
         >
           <UserField dataToShow={following} text="Seguindo" />
-        </div>
+        </Link>
       </div>
     </header>
   );

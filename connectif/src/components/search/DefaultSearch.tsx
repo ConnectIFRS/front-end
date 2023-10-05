@@ -5,39 +5,28 @@ import decode from "jwt-decode";
 import { FormEvent, useEffect, useState } from "react";
 import styles from "../../../styles/followerssearch.module.scss";
 import ResumedUserCard from "../ResumedUserCard";
-export default function FollowersAndFollowingSearch({
+export default function DefaultSearch({
   token,
   userId,
-  isFollowing,
 }: {
   token: string;
   userId: string;
-  isFollowing: boolean;
 }) {
   const [users, setUsers] = useState<resumed_user_type[]>([]);
-  const handleGetUserFollowers = async () => {
-    const response = await api.post(
-      !isFollowing
-        ? `/search/followers/${userId}`
-        : `/search/following/${userId}`,
-      {
-        userName: "",
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setUsers(response.data);
-  };
+  const [recentSearched, setRecentSearched] = useState<resumed_user_type[]>([]);
+  //   const handleGetUserRecentSearch = async () => {
+  //     const response = await api.post(`/search/recent/${userId}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setRecentSearched(response.data);
+  //   };
   const handleSearchChange = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const response = await api.post(
-      !isFollowing
-        ? `/search/followers/${userId}`
-        : `/search/following/${userId}`,
+      "/search",
       {
         userName: formData.get("search"),
       },
@@ -50,9 +39,9 @@ export default function FollowersAndFollowingSearch({
     setUsers(response.data);
   };
   const decodedToken: JWTToken = decode(token);
-  useEffect(() => {
-    handleGetUserFollowers();
-  }, []);
+  //   useEffect(() => {
+  //     handleGetUserRecentSearch();
+  //   }, []);
   return (
     <div className={styles.usersSearch}>
       <form onChange={handleSearchChange} className={styles.inputUtil}>
@@ -66,10 +55,7 @@ export default function FollowersAndFollowingSearch({
       </form>
       {users.length === 0 ? (
         <div>
-          <p>
-            Estamos requisitando a lista de usuários ou o usuário não possui
-            nenhum seguidor
-          </p>
+          <p>Não existe nenhum usuário com o valor inserido na sua pesquisa</p>
         </div>
       ) : (
         <div className={styles.followersList}>

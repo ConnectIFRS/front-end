@@ -24,8 +24,13 @@ export default async function FollowingPage({
         userName={user.name}
         followers={user.followers}
         following={user.following}
+        userId={user.id}
       />
-      <FollowersAndFollowingSearch token={token ?? ""} userId={id} />
+      <FollowersAndFollowingSearch
+        isFollowing
+        token={token ?? ""}
+        userId={id}
+      />
       <Footer />
     </main>
   );
