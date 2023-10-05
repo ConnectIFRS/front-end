@@ -1,3 +1,9 @@
+import { Nunito } from 'next/font/google';
+const mainFontFamily = Nunito({
+  weight: ['300', '400', '700'],
+  subsets: ['latin'],
+});
+
 import type { Metadata } from "next";
 // import { Nunito, Oswald } from "next/font/google";
 import "./globals.css";
