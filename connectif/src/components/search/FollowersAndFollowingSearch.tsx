@@ -2,9 +2,11 @@
 import { api } from "@/app/api";
 import { JWTToken, resumed_user_type } from "@/app/api/types";
 import decode from "jwt-decode";
+import { useUrl } from "nextjs-current-url";
 import { FormEvent, useEffect, useState } from "react";
 import styles from "../../../styles/followerssearch.module.scss";
 import ResumedUserCard from "../ResumedUserCard";
+
 export default function FollowersAndFollowingSearch({
   token,
   userId,
@@ -53,6 +55,7 @@ export default function FollowersAndFollowingSearch({
   useEffect(() => {
     handleGetUserFollowers();
   }, []);
+  const { href: currentUrl, pathname } = useUrl() ?? {};
   return (
     <div className={styles.usersSearch}>
       <form onChange={handleSearchChange} className={styles.inputUtil}>
@@ -80,6 +83,7 @@ export default function FollowersAndFollowingSearch({
                 user={user}
                 key={user.id}
                 userId={decodedToken.sub}
+                redirectUrl={currentUrl ?? ""}
               />
             );
           })}
