@@ -55,7 +55,7 @@ export default async function User({ id }: { id: string }) {
         </div>
         <div className={styles.userActions}>
           {decodedToken.sub === user.id ? (
-            <Others text="Editar Perfil" url="/user/edit" />
+            <Others text="Editar Perfil" url={`/user/edit/${user.id}`} />
           ) : (
             <Follow
               token={token ?? ""}
