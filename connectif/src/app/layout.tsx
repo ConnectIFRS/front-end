@@ -29,3 +29,29 @@ export default function RootLayout({
     </html>
   );
 }
+
+/*
+import React from 'react';
+import Head from 'next/head';
+import { mainFontFamily } from './fonts'; // Certifique-se de que você importou corretamente a configuração da fonte
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <Head>
+        {/* Adicione o link para a fonte do Google Fonts }
+        <link rel="stylesheet" href={mainFontFamily.href} />
+      </Head>
+      <html lang="en">
+        <body style={{ fontFamily: mainFontFamily.family }}>
+          {children}
+        </body>
+      </html>
+    </>
+  );
+}
+*/
