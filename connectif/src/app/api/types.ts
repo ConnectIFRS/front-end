@@ -26,7 +26,8 @@ export type post_type = {
     },
     likes: number,
     comments: number,
-    likedByUser: boolean
+    likedByUser: boolean,
+    fullComments: comment_type[]
 }
 
 export type comment_type = {

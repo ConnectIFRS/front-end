@@ -14,18 +14,4 @@
         padding: 20px 0;
         border-bottom: 2px solid $primaryColor;
     }
-
-    .comment {
-        display: flex;
-        width: 100%;
-        padding: 0 15px;
-        // align-items: center;
-        gap: 15px;
-
-        .image {
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-    }
 }

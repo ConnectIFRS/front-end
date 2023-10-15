@@ -47,7 +47,6 @@ export default function ResumedUserCard({
             followedByUser={user.followedByUser}
             token={token}
             userId={user.id}
-            redirectUrl={redirectUrl}
           />
         </div>
       )}

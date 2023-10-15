@@ -1,5 +1,6 @@
 import { api } from "@/app/api";
 import { comment_type } from "@/app/api/types";
+import Comment from "@/components/Comment";
 import CreateCommentForm from "@/components/CreateCommentForm";
 import EmptyComments from "@/components/EmptyCommments";
 import Footer from "@/components/Footer";
@@ -32,28 +33,7 @@ export default async function Comments({ params }: { params: { id: string } }) {
       ) : (
         <>
           {commentsList.map((comment) => {
-            return (
-              <div key={comment.id} className={styles.comment}>
-                <Link href={`/user/${comment.user.id}`}>
-                  <Image
-                    src={comment.user.profilePic}
-                    alt={comment.user.name}
-                    width={40}
-                    height={40}
-                    quality={100}
-                    className={styles.image}
-                  />
-                </Link>
-                <div>
-                  <p>
-                    <Link href={`/user/${comment.user.id}`}>
-                      <strong>{comment.user.name}</strong>
-                    </Link>
-                  </p>
-                  <p>{comment.content}</p>
-                </div>
-              </div>
-            );
+            return <Comment comment={comment} key={comment.id} />;
           })}
         </>
       )}

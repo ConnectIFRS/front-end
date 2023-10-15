@@ -6,6 +6,7 @@ import ptBr from "dayjs/locale/pt-br";
 import Cookie from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import comment from "../../public/images/posts/comment.svg";
 import activeLike from "../../public/images/posts/like-active.svg";
@@ -15,6 +16,7 @@ import styles from "../../styles/post.module.scss";
 dayjs.locale(ptBr);
 
 export default function Post({ post }: { post: post_type }) {
+  const router = useRouter();
   const [liked, setLiked] = useState<boolean>(post.likedByUser);
   const [serverPost, setServerPost] = useState<post_type>(post);
   const token = Cookie.get("user_token");
@@ -105,13 +107,16 @@ export default function Post({ post }: { post: post_type }) {
           </Link>
         </div>
       </div>
-      <div className={styles.postContent}>
+      <div
+        className={styles.postContent}
+        onClick={() => router.push(`/post/${post.id}`)}
+      >
         <span>
           <strong>{serverPost.user.name}</strong>
           <span className={styles.postDescription}>{serverPost.content}</span>
         </span>
       </div>
-      <time>
+      <time onClick={() => router.push(`/post/${post.id}`)}>
         {dayjs(serverPost.createdAt).format(
           "D[ de ]MMMM[ de ]YYYY,[ às ]H[:]mm"
         )}

@@ -3,10 +3,11 @@ import { api } from "@/app/api";
 import Cookie from "js-cookie";
 import { MoveRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import styles from "../../styles/createcommentform.module.scss";
 
 export default function CreateCommentForm({ postId }: { postId: string }) {
+  const [comment, setComment] = useState<string>("");
   const router = useRouter();
   const handleCreateComment = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,23 +26,27 @@ export default function CreateCommentForm({ postId }: { postId: string }) {
       }
     );
     if (response.status === 200 || response.status === 201) {
-      router.push(`/post/comments/${postId}`);
+      setComment("");
+      router.refresh();
     }
-    formData.set("comment", "");
   };
   return (
     <form className={styles.form} onSubmit={handleCreateComment}>
-      <label htmlFor="comment">
-        <button type="submit">
-          <MoveRight width={18} height={18} />
-        </button>
-      </label>
-      <input
-        type="text"
-        id="comment"
-        name="comment"
-        placeholder="Insira seu comentário..."
-      />
+      <div>
+        <label htmlFor="comment">
+          <button type="submit">
+            <MoveRight width={18} height={18} />
+          </button>
+        </label>
+        <input
+          type="text"
+          id="comment"
+          name="comment"
+          placeholder="Insira seu comentário..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+      </div>
     </form>
   );
 }
