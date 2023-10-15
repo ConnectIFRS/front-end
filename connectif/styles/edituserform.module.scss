@@ -1,0 +1,38 @@
+@import "./globals.scss";
+.form {
+    flex: 1;
+    .profilePic {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: $secondaryFont;
+        }
+    }
+    .inputGroup {
+        margin: 20px 0;
+        position: relative;
+        button {
+            background-color: $primaryColor;
+            color: white;
+            font-family: $secondaryFont;
+            border: 0;
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all ease 0.2s;
+            cursor: pointer;
+            font-size: 18px;
+            &:hover {
+                transform: translateY(-5px);
+            }
+        }
+    }
+}

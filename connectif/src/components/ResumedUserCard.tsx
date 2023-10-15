@@ -20,7 +20,10 @@ export default function ResumedUserCard({
   const router = useRouter();
   const decodedToken: JWTToken = decode(token);
   return (
-    <div className={styles.resumedUserCard}>
+    <div
+      className={styles.resumedUserCard}
+      onClick={() => router.push(`/user/${user.id}`)}
+    >
       <Image src={user.profilePic} alt={user.name} width={40} height={40} />
       <div className={styles.userData}>
         <span>{user.name}</span>

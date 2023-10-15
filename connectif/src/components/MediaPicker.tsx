@@ -3,8 +3,8 @@ import styles from "../../styles/mediapicker.module.scss";
 
 import { ChangeEvent, useState } from "react";
 
-export function MediaPicker() {
-  const [preview, setPreview] = useState<string | null>(null);
+export function MediaPicker({ defaultValue }: { defaultValue?: string }) {
+  const [preview, setPreview] = useState<string | null>(defaultValue ?? null);
   const onFileSelected = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
 

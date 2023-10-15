@@ -1,6 +1,7 @@
 import { api } from "@/app/api";
 import { JWTToken, user_type } from "@/app/api/types";
 import decode from "jwt-decode";
+import { Play, Video } from "lucide-react";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +17,7 @@ export default async function User({ id }: { id: string }) {
       Authorization: `Bearer ${token}`,
     },
   });
+  const imageRegex = /\.(gif|jpg|jpeg|tiff|png)$/i;
   const decodedToken: JWTToken = decode(token ?? "");
   const user: user_type = response.data;
   return (
@@ -80,7 +82,26 @@ export default async function User({ id }: { id: string }) {
             {user.posts.map((post) => {
               return (
                 <Link href={`/post/${post.id}`}>
-                  <img src={post.coverUrl} alt="user-post" />
+                  {imageRegex.test(post.coverUrl) ? (
+                    <img src={post.coverUrl} alt="user-post" />
+                  ) : (
+                    <div className={styles.videoBox}>
+                      <video
+                        width="100%"
+                        height="100%"
+                        style={{
+                          aspectRatio: "3/4",
+                          objectFit: "cover",
+                        }}
+                      >
+                        <source src={post.coverUrl ?? ""} />
+                        Seu navegador não suporta o elemento de vídeo.
+                      </video>
+                      <div>
+                        <Video width={20} height={20} />
+                      </div>
+                    </div>
+                  )}
                 </Link>
               );
             })}

@@ -62,7 +62,18 @@ export type user_type = {
         id: number, className: string 
     }
 }
-
+export type user_to_update_type = {
+    id: string,
+    preferences: {
+        id: number,
+        title: string,
+        icon: string
+    }[],
+    profilePic: string,
+    name: string,
+    description: string,
+    classId: number,
+}
 export type resumed_user_type = {
     id: string,
     profilePic: string,

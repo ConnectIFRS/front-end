@@ -25,7 +25,7 @@ export default function NewPostForm() {
       "/posts",
       {
         coverUrl: media,
-        content: formData.get("content"),
+        content: `${formData.get("content")}`,
       },
       {
         headers: {

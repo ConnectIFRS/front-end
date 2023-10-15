@@ -1,29 +1,22 @@
 "use client";
 import { api } from "@/app/api";
 import { salvarTokenNoCookie } from "@/app/api/functions";
-import { classes_type, user_type } from "@/app/api/types";
+import { classes_type, user_to_update_type } from "@/app/api/types";
 import { Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
-import styles from "../../styles/register.module.scss";
+import { FormEvent } from "react";
+import styles from "../../styles/edituserform.module.scss";
 import DefaultInput from "./DefaultInput";
 import DefaultSelect from "./DefaultSelect";
 import { MediaPicker } from "./MediaPicker";
 
-interface NewUser {
-  name: string;
-  login: string;
-  password: string;
-  class: number;
-  description: string;
-}
-
-export default async function UpdateUserForm({ user }: { user: user_type }) {
-  // const [newUser, setNewUser] = useState<NewUser>({
-  //     class: user.className.id,
-  //     description: user.description,
-  //     login: user.
-  // })
+export default async function UpdateUserForm({
+  user,
+  userToken,
+}: {
+  user: user_to_update_type;
+  userToken: string;
+}) {
   const router = useRouter();
   let classes: classes_type[] = [];
   if (classes.length == 0) {
@@ -39,36 +32,48 @@ export default async function UpdateUserForm({ user }: { user: user_type }) {
     if (fileToUpload) {
       const uploadFormData = new FormData();
       uploadFormData.set("file", fileToUpload);
+
       const uploadResponse = await api.post(
         "/upload/profilePics",
         uploadFormData
       );
       profilePic = uploadResponse.data.fileURL;
     }
+
     if (formData.get("password") === formData.get("confirmPassword")) {
-      const response = await api.post("/users", {
-        profilePic,
-        name: formData.get("name"),
-        login: formData.get("email"),
-        password: formData.get("password"),
-        class: Number(formData.get("classId")),
-        description: formData.get("description"),
-      });
+      const response = await api.put(
+        `/users/${user.id}`,
+        {
+          profilePic,
+          name: formData.get("name"),
+          password: formData.get("password"),
+          classId: Number(formData.get("classId")),
+          description: formData.get("description"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
       const { token } = response.data;
+
       if (salvarTokenNoCookie(token)) {
-        router.push("/homepage");
+        router.push(`/user/${user.id}`);
       }
     }
   };
+
   return (
-    <form onSubmit={handleUpdateUser}>
-      <DefaultInput type="text" name="name" id="name" required label="Nome" />
+    <form className={styles.form} onSubmit={handleUpdateUser}>
       <DefaultInput
         type="text"
-        name="email"
-        id="email"
+        id="name"
+        name="name"
         required
-        label="E-mail"
+        label="Nome"
+        defaultValue={user.name}
       />
       <DefaultInput
         type="password"
@@ -90,8 +95,9 @@ export default async function UpdateUserForm({ user }: { user: user_type }) {
         id="description"
         required
         label="Descrição"
+        defaultValue={user.description}
       />
-      <DefaultSelect name="classId">
+      <DefaultSelect name="classId" defaultValue={user.classId}>
         <option value="">Selecione uma turma</option>
         {classes.map((classe) => {
           return (
@@ -102,13 +108,13 @@ export default async function UpdateUserForm({ user }: { user: user_type }) {
         })}
       </DefaultSelect>
       <div className={styles.profilePic}>
-        <MediaPicker />
+        <MediaPicker defaultValue={user.profilePic} />
         <label htmlFor="media">
           <Camera /> Imagem de perfil
         </label>
       </div>
       <div className={styles.inputGroup}>
-        <button type="submit">Entrar</button>
+        <button type="submit">Salvar Alterações</button>
       </div>
     </form>
   );

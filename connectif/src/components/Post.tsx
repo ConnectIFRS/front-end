@@ -18,6 +18,7 @@ export default function Post({ post }: { post: post_type }) {
   const [liked, setLiked] = useState<boolean>(post.likedByUser);
   const [serverPost, setServerPost] = useState<post_type>(post);
   const token = Cookie.get("user_token");
+  const imageRegex = /\.(gif|jpg|jpeg|tiff|png)$/i;
   const handleLikePost = async (postId: string) => {
     const response = await api.post(
       "/likes",
@@ -35,6 +36,7 @@ export default function Post({ post }: { post: post_type }) {
       setServerPost(response.data);
     }
   };
+  console.log();
   return (
     <div className={styles.post}>
       <div className={styles.authorArea}>
@@ -54,12 +56,27 @@ export default function Post({ post }: { post: post_type }) {
           </div>
         </Link>
       </div>
-      <img
-        src={serverPost.coverUrl}
-        alt="post content"
-        className={styles.postImage}
-        onDoubleClick={() => handleLikePost(post.id)}
-      />
+      {imageRegex.test(serverPost.coverUrl) ? (
+        <img
+          src={serverPost.coverUrl}
+          alt="post content"
+          className={styles.postImage}
+          onDoubleClick={() => handleLikePost(post.id)}
+        />
+      ) : (
+        <video
+          controls
+          width="100%"
+          height="auto"
+          style={{
+            aspectRatio: "16/9",
+            objectFit: "cover",
+          }}
+        >
+          <source src={serverPost.coverUrl ?? ""} />
+          Seu navegador não suporta o elemento de vídeo.
+        </video>
+      )}
       <div className={styles.interactions}>
         <div>
           {!liked ? (
