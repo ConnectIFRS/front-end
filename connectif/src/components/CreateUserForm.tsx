@@ -9,6 +9,7 @@ import styles from "../../styles/register.module.scss";
 import DefaultInput from "./DefaultInput";
 import DefaultSelect from "./DefaultSelect";
 import { MediaPicker } from "./MediaPicker";
+import ToastContainer from "../components/popups/page";
 
 export default async function CreateUserForm() {
   const router = useRouter();
@@ -16,7 +17,12 @@ export default async function CreateUserForm() {
   if (classes.length == 0) {
     const response = await api.get("/classes");
     classes = response.data;
+
+    if (response.status != 200) {
+      return <ToastContainer />
+    }
   }
+  
 
   const handleCreateUser = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
