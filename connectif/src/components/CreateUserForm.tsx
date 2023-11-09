@@ -4,14 +4,15 @@ import { salvarTokenNoCookie } from "@/app/api/functions";
 import { classes_type } from "@/app/api/types";
 import { Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import styles from "../../styles/register.module.scss";
+import ToastContainer from "../components/popups/page";
 import DefaultInput from "./DefaultInput";
 import DefaultSelect from "./DefaultSelect";
 import { MediaPicker } from "./MediaPicker";
-import ToastContainer from "../components/popups/page";
 
 export default async function CreateUserForm() {
+  const [phoneNumber, setPhoneNumber] = useState<string|null>(null)
   const router = useRouter();
   let classes: classes_type[] = [];
   if (classes.length == 0) {
@@ -46,6 +47,7 @@ export default async function CreateUserForm() {
         password: formData.get("password"),
         class: Number(formData.get("classId")),
         description: formData.get("description"),
+        instagramName: formData.get("instagramName"),
       });
       const { token } = response.data;
       if (salvarTokenNoCookie(token)) {
@@ -94,6 +96,18 @@ export default async function CreateUserForm() {
           );
         })}
       </DefaultSelect>
+      <DefaultInput
+        type="text"
+        name="instagramName"
+        id="instagramName"
+        label="@ do Instagram (opcional)"
+      />
+      <DefaultInput
+        type="tel"
+        name="wppNumber"
+        id="wppNumber"
+        label="WhatsApp (opcional)"
+      />
       <div className={styles.profilePic}>
         <MediaPicker />
         <label htmlFor="media">

@@ -1,7 +1,7 @@
 import { api } from "@/app/api";
 import { JWTToken, user_type } from "@/app/api/types";
 import decode from "jwt-decode";
-import { Play, Video } from "lucide-react";
+import { Video } from "lucide-react";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,7 @@ export default async function User({ id }: { id: string }) {
       Authorization: `Bearer ${token}`,
     },
   });
-  const imageRegex = /\.(gif|jpg|jpeg|tiff|png)$/i;
+  const imageRegex = /\.(gif|jpg|jpeg|tiff|png|webp|bmp|raws|exif|ppm|pgm|pbm|pnm|svg)$/i;
   const decodedToken: JWTToken = decode(token ?? "");
   const user: user_type = response.data;
   return (

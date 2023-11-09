@@ -9,7 +9,6 @@
         display: flex;
         gap: 10px;
         align-items: center;
-        // justify-content: center;
         width: 100%;
         padding: 0 20px;
 
@@ -17,6 +16,7 @@
             img {
                 aspect-ratio: "1/1";
                 border-radius: 50%;
+                object-fit: cover;
             }
 
             .authorInfos {

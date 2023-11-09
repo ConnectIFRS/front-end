@@ -32,7 +32,7 @@ export default async function Footer() {
           alt="post"
         />
       </Link>
-      <Link href="/message">
+      {/* <Link href="/message">
         <Image
           src={messageUnactive}
           width={25}
@@ -40,7 +40,7 @@ export default async function Footer() {
           quality={100}
           alt="message"
         />
-      </Link>
+      </Link> */}
       <Link href="/search">
         <Image
           src={unactiveSearch}
