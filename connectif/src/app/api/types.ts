@@ -59,8 +59,8 @@ export type user_type = {
         coverUrl: string,
         id: string
     }[],
-    className: { 
-        id: number, className: string 
+    className: {
+        id: number, className: string
     }
 }
 export type user_to_update_type = {
@@ -82,3 +82,13 @@ export type resumed_user_type = {
     userClass: string,
     followedByUser: boolean
 }
+
+export type preference_type = {
+    id: number,
+    title: string,
+    icon: string
+}
+export type select_type = {
+    label: string;
+    value: number;
+};

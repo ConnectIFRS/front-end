@@ -1,17 +1,19 @@
 "use client";
 import { api } from "@/app/api";
 import { salvarTokenNoCookie } from "@/app/api/functions";
-import { classes_type } from "@/app/api/types";
+import { classes_type, preference_type, select_type } from "@/app/api/types";
 import { Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import Select from 'react-select';
 import styles from "../../styles/register.module.scss";
 import ToastContainer from "../components/popups/page";
 import DefaultInput from "./DefaultInput";
 import DefaultSelect from "./DefaultSelect";
 import { MediaPicker } from "./MediaPicker";
+import SecondarySelect from "./Select";
 
-export default async function CreateUserForm() {
+export default async function CreateUserForm({preferences}: {preferences: preference_type[]}) {
   const [phoneNumber, setPhoneNumber] = useState<string|null>(null)
   const router = useRouter();
   let classes: classes_type[] = [];
@@ -55,6 +57,15 @@ export default async function CreateUserForm() {
       }
     }
   };
+
+  const [userPreferences, setUserPreferences] = useState<number[]>([]);
+  // const preferenceOptions = [];
+  // for (const preference of preferences) {
+  //   preferenceOptions.push({
+  //     value: preference.id,
+  //     label: preference.title,
+  //   });
+  // }
   return (
     <form onSubmit={handleCreateUser}>
       <DefaultInput type="text" name="name" id="name" required label="Nome" />
@@ -108,6 +119,14 @@ export default async function CreateUserForm() {
         id="wppNumber"
         label="WhatsApp (opcional)"
       />
+      <SecondarySelect onChange={(e: select_type[]) => {
+            let values: number[] = [];
+            e.forEach((element) => {
+              values.push(element.value);
+            });
+            setUserPreferences(values);
+          }} 
+          isMulti name="preferences" options={preferences} placeholder="Preferências" />
       <div className={styles.profilePic}>
         <MediaPicker />
         <label htmlFor="media">
