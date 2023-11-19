@@ -37,18 +37,18 @@ const SecondarySelect = ({
   name: string;
   onChange: (e: any) => void;
 }) => {
-  const preferenceOptions = [];
-  for (const preference of options) {
-    preferenceOptions.push({
-      value: preference.id,
-      label: preference.name,
-    });
-  }
+  // const preferenceOptions = [];
+  // for (const preference of options) {
+  //   preferenceOptions.push({
+  //     value: preference.id,
+  //     label: preference.name,
+  //   });
+  // }
   return (
     <div style={{ width: "100%" }}>
       <Select
         placeholder={placeholder}
-        options={preferenceOptions}
+        options={options}
         isMulti={isMulti}
         styles={customStyles}
         name={name}
