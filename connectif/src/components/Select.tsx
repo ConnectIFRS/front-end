@@ -4,23 +4,40 @@ import Select from "react-select";
 const customStyles = {
   control: (provided: any) => ({
     ...provided,
-    border: "1px solid #171717",
-    borderRadius: "8px",
+    border: "1px solid #101efc",
+    borderRadius: "3px",
     backgroundColor: "transparent",
     marginBottom: "20px",
+    color: "white",
+    fontFamily: "nunito",
   }),
   multiValueLabel: (provided: any) => ({
     ...provided,
-    color: "#171717",
+    color: "#ffffff",
   }),
   option: (provided: any, state: any) => ({
     ...provided,
-    color: state.isSelected ? "#ffffff" : "#171717",
+    color: "#ffffff",
+    fontFamily: "nunito",
     backgroundColor: state.isSelected
-      ? "#171717"
+      ? "#101efc"
       : state.isFocused
-      ? "#17171750"
-      : "#ffffff",
+      ? "#101efc50"
+      : "#2f2a2a",
+  }),
+  multiValueLabel: (provided: any, state: any) => ({
+    ...provided,
+    color: "#ffffff",
+    backgroundColor: "#101efc",
+    fontFamily: "nunito",
+  }),
+  multiValueRemove: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: "#101efc",
+    color: "white",
+    ":hover": {
+      backgroundColor: "#101efc50",
+    },
   }),
 };
 
@@ -37,13 +54,6 @@ const SecondarySelect = ({
   name: string;
   onChange: (e: any) => void;
 }) => {
-  // const preferenceOptions = [];
-  // for (const preference of options) {
-  //   preferenceOptions.push({
-  //     value: preference.id,
-  //     label: preference.name,
-  //   });
-  // }
   return (
     <div style={{ width: "100%" }}>
       <Select

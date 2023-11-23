@@ -5,12 +5,14 @@ import { classes_type, preference_type, select_type } from "@/app/api/types";
 import { Camera } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { IMaskInput } from "react-imask";
 import Select from "react-select";
 import styles from "../../styles/register.module.scss";
 import ToastContainer from "../components/popups/page";
 import DefaultInput from "./DefaultInput";
 import DefaultSelect from "./DefaultSelect";
 import { MediaPicker } from "./MediaPicker";
+import PhoneInput from "./PhoneInput";
 import SecondarySelect from "./Select";
 
 export default function CreateUserForm({
@@ -20,7 +22,6 @@ export default function CreateUserForm({
   preferences: preference_type[];
   classes: classes_type[];
 }) {
-  const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
   const router = useRouter();
 
   const handleCreateUser = async (event: FormEvent<HTMLFormElement>) => {
@@ -46,6 +47,8 @@ export default function CreateUserForm({
         class: Number(formData.get("classId")),
         description: formData.get("description"),
         instagramName: formData.get("instagramName"),
+        whatsappNumber: formData.get("wppNumber"),
+        preferences: userPreferences,
       });
       const { token } = response.data;
       if (salvarTokenNoCookie(token)) {
@@ -63,7 +66,7 @@ export default function CreateUserForm({
     });
   }
   return (
-    <form onSubmit={handleCreateUser}>
+    <form onSubmit={handleCreateUser} style={{ maxWidth: "70%" }}>
       <DefaultInput type="text" name="name" id="name" required label="Nome" />
       <DefaultInput
         type="text"
@@ -109,7 +112,7 @@ export default function CreateUserForm({
         id="instagramName"
         label="@ do Instagram (opcional)"
       />
-      <DefaultInput
+      <PhoneInput
         type="tel"
         name="wppNumber"
         id="wppNumber"
@@ -117,13 +120,11 @@ export default function CreateUserForm({
       />
       <SecondarySelect
         onChange={(e: select_type[]) => {
-          console.log(preferences);
           let values: number[] = [];
           e.forEach((element) => {
             values.push(element.value);
           });
           setUserPreferences(values);
-          console.log(userPreferences);
         }}
         isMulti
         name="preferences"
