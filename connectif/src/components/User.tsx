@@ -17,7 +17,8 @@ export default async function User({ id }: { id: string }) {
       Authorization: `Bearer ${token}`,
     },
   });
-  const imageRegex = /\.(gif|jpg|jpeg|tiff|png|webp|bmp|raws|exif|ppm|pgm|pbm|pnm|svg)$/i;
+  const imageRegex =
+    /\.(gif|jpg|jpeg|tiff|png|webp|bmp|raws|exif|ppm|pgm|pbm|pnm|svg)$/i;
   const decodedToken: JWTToken = decode(token ?? "");
   const user: user_type = response.data;
   return (
@@ -54,6 +55,10 @@ export default async function User({ id }: { id: string }) {
         </div>
         <div>
           <p>{user.description}</p>
+        </div>
+        <div>
+          <h3>Redes sociais</h3>
+          {user.whatsappNumber && <div></div>}
         </div>
         <div className={styles.userActions}>
           {decodedToken.sub === user.id ? (

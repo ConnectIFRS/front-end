@@ -61,7 +61,9 @@ export type user_type = {
     }[],
     className: {
         id: number, className: string
-    }
+    },
+    whatsappNumber?: string,
+    instagramName?: string
 }
 export type user_to_update_type = {
     id: string,
