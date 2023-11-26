@@ -1,4 +1,4 @@
-export default function EmptyPosts() {
+export default function EmptyPostsInFeed() {
   return (
     <section
       style={{
@@ -8,10 +8,14 @@ export default function EmptyPosts() {
         justifyContent: "center",
         textAlign: "center",
         fontFamily: "Nunito",
+        marginTop: "30px",
       }}
     >
       <strong>
-        <span>Este usuário ainda não compartilhou nenhuma recordação.</span>
+        <span>
+          Ainda não temos nenhum post registrado! Seja o primeiro a compartilhar
+          uma recordação!
+        </span>
       </strong>
     </section>
   );

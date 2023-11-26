@@ -3,6 +3,7 @@ import { post_type } from "@/app/api/types";
 import { cookies } from "next/headers";
 
 import styles from "../../styles/feed.module.scss";
+import EmptyPostsInFeed from "./EmptyPostsInFeed";
 import Post from "./Post";
 
 export default async function Feed() {
@@ -17,7 +18,7 @@ export default async function Feed() {
   posts = feed.data;
 
   if (posts.length === 0 || feed.status === 401 || feed.status === 500) {
-    return "nenhum post";
+    return <EmptyPostsInFeed />;
   }
 
   return (

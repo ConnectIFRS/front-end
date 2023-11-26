@@ -1,5 +1,9 @@
 import { api } from "@/app/api";
-import { user_to_update_type } from "@/app/api/types";
+import {
+  classes_type,
+  preference_type,
+  user_to_update_type,
+} from "@/app/api/types";
 import Footer from "@/components/Footer";
 import UpdateUserForm from "@/components/UpdateUserForm";
 import { cookies } from "next/headers";
@@ -19,12 +23,23 @@ export default async function EditUserPage({
   });
   const user: user_to_update_type = response.data;
 
+  const preferencesResponse = await api.get("/preferences");
+  const preferences: preference_type[] = preferencesResponse.data;
+
+  const classesResponse = await api.get("/classes");
+  const classes: classes_type[] = classesResponse.data;
+
   return (
     <main className={styles.main}>
       <div className={styles.logoArea}>
         <h2>Editar Perfil</h2>
       </div>
-      <UpdateUserForm user={user} userToken={token ?? ""} />
+      <UpdateUserForm
+        classes={classes}
+        preferences={preferences}
+        user={user}
+        userToken={token ?? ""}
+      />
       <Footer />
     </main>
   );

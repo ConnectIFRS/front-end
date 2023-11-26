@@ -6,7 +6,11 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/user.module.scss";
+import EmptyPosts from "./EmptyPosts";
+import InstagramCard from "./InstagramCard";
+import Preference from "./Preference";
 import UserField from "./UserField";
+import WhatsAppCard from "./WhatsAppCard";
 import Follow from "./buttons/Follow";
 import Others from "./buttons/Others";
 
@@ -58,7 +62,27 @@ export default async function User({ id }: { id: string }) {
         </div>
         <div>
           <h3>Redes sociais</h3>
-          {user.whatsappNumber && <div></div>}
+          <div className={styles.socialMediasList}>
+            {user.whatsappNumber !== null && user.whatsappNumber !== "" && (
+              <WhatsAppCard wppNumber={user.whatsappNumber} />
+            )}
+            {user.instagramName !== null && user.instagramName !== "" && (
+              <InstagramCard instagramName={user.instagramName} />
+            )}
+          </div>
+          {!user.instagramName && !user.whatsappNumber && (
+            <span>
+              O usuário não informou nenhuma rede social ao criar a conta
+            </span>
+          )}
+        </div>
+        <div className={styles.userPreferences}>
+          <h3>Preferências</h3>
+          <div className={styles.preferencesList}>
+            {user.preferences.map((preference) => (
+              <Preference preference={preference} />
+            ))}
+          </div>
         </div>
         <div className={styles.userActions}>
           {decodedToken.sub === user.id ? (
@@ -111,7 +135,7 @@ export default async function User({ id }: { id: string }) {
             })}
           </div>
         ) : (
-          <p>no posts</p>
+          <EmptyPosts />
         )}
       </div>
     </main>

@@ -20,7 +20,8 @@ export default function Post({ post }: { post: post_type }) {
   const [liked, setLiked] = useState<boolean>(post.likedByUser);
   const [serverPost, setServerPost] = useState<post_type>(post);
   const token = Cookie.get("user_token");
-  const imageRegex = /\.(gif|jpg|jpeg|tiff|png|webp|bmp|raws|exif|ppm|pgm|pbm|pnm|svg)$/i;
+  const imageRegex =
+    /\.(gif|jpg|jpeg|tiff|png|webp|bmp|raws|exif|ppm|pgm|pbm|pnm|svg)$/i;
   const handleLikePost = async (postId: string) => {
     const response = await api.post(
       "/likes",
@@ -38,7 +39,6 @@ export default function Post({ post }: { post: post_type }) {
       setServerPost(response.data);
     }
   };
-  console.log();
   return (
     <div className={styles.post}>
       <div className={styles.authorArea}>
@@ -49,7 +49,7 @@ export default function Post({ post }: { post: post_type }) {
             width={40}
             height={40}
             quality={100}
-            style={{aspectRatio: '1/1'}}
+            style={{ aspectRatio: "1/1" }}
           />
         </Link>
         <Link href={`/user/${serverPost.user.id}`}>

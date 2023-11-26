@@ -5,7 +5,6 @@ import { JWTToken } from "./types";
 export function salvarTokenNoCookie(token: string): boolean {
     try {
         const decodedToken: JWTToken = decode(token);
-        console.log(decodedToken)
         const expiress = new Date(decodedToken.exp * 1000).toString();
         document.cookie = `user_token=${token}; path=/; expires=${expiress};`;
         return true;
@@ -16,7 +15,6 @@ export function salvarTokenNoCookie(token: string): boolean {
 
 export function getDecodedToken(): JWTToken | false {
     const token = Cookie.get("user_token");
-    console.log(Cookie)
     if (token) {
         try {
             const decodedToken: JWTToken = decode(token);

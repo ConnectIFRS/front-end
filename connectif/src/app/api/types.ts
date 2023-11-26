@@ -62,8 +62,8 @@ export type user_type = {
     className: {
         id: number, className: string
     },
-    whatsappNumber?: string,
-    instagramName?: string
+    whatsappNumber: string | null,
+    instagramName: string | null
 }
 export type user_to_update_type = {
     id: string,
@@ -76,6 +76,8 @@ export type user_to_update_type = {
     name: string,
     description: string,
     classId: number,
+    whatsappNumber?: string,
+    instagramName?: string
 }
 export type resumed_user_type = {
     id: string,
