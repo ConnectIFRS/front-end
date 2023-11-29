@@ -2,7 +2,10 @@
 .form {
     display: flex;
     // flex-direction: column;
+    background-color: $bgColor;
     div {
+        background-color: $bgColor;
+        z-index: 1;
         border-top: 1px solid $secondaryColor;
         height: 41px;
         position: fixed;
